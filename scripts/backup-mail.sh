@@ -7,3 +7,4 @@ DATE=$(date --rfc-3339=date)
 sshpass -f '/root/.tarball-mail' scp -P 2020 tarball-mail@207.154.197.85:/home/tarball-mail/${DATE}.mail.tar.gz /mnt/raid/backups/mail
 
 chown nobody:nogroup /mnt/raid/backups/mail/${DATE}.mail.tar.gz
+
