@@ -13,3 +13,8 @@ Follow instructions here https://blog.bj13.us/2016/09/06/how-to-send-yourself-a-
 ###Pluto Monitoring
 - Bot name: `micheled_pluto`
 - Bot user name: `micheled_pluto_bot`
+
+## Current 1.0.0
+
+## Upcoming 1.1.0
+- Configure https://lib.rs/crates/check-if-email-exists and add a monitor for mail availability.
