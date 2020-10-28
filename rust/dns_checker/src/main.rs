@@ -46,7 +46,7 @@ fn main() -> Result<(), Error> {
     ];
 
     validate_domains(domains);
-    Ok(send_telegram_message(String::from("DNS records ok")))
+    Ok(send_telegram_message(String::from("DNS checks done")))
 }
 
 #[cfg(test)]
