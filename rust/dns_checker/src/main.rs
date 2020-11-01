@@ -1,93 +1,73 @@
-/**
- * By default, Rust variables are passed by "copy" or "move" (depends on type). Remember to
- * expressly use ref in function declarations!!!
- *
- * @see https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html
- */
+mod consts;
+use crate::consts::*;
 use std::env;
-use std::io::Error;
 use trust_dns_resolver::Resolver;
 use ureq;
+use ureq::Error;
 
-/// Send a message to the defined BOT by the env vars.
-pub fn send_telegram_message(text: String) {
+/// Send a message to the requested bot.
+pub fn send_telegram_message(text: String, api_key: &str, chat_id: &str) {
     ureq::post(&format!(
-        "https://api.telegram.org/bot{apiKey}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text=<code>{text}</code>",
-        apiKey = env::var("TELEGRAM_MICHELED_PLUTO_API_KEY").unwrap(),
-        chat_id = env::var("TELEGRAM_MICHELED_PLUTO_CHAT_ID").unwrap(),
+        "https://api.telegram.org/bot{api_key}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text=<code>{text}</code>",
+        api_key = api_key,
+        chat_id = chat_id,
         text = text
     ))
     .call();
 }
 
-/// Perform a dns lookup for the given domain.
-fn lookup_domain(resolver: &Resolver, domain: &str) {
-    let resolve_result = resolver.lookup_ip(domain);
-
-    if resolver.lookup_ip(domain).is_err() {
-        send_telegram_message(format!("{:?}", resolve_result.unwrap_err().kind()));
-    }
-}
-
-/// Given a list of domains, execute a DNS lookup.
+/// Do DNS lookups for the given domains. Send a Telegram messages to emergencies in case of error.
 fn validate_domains(domains: Vec<&str>) {
     let resolver = Resolver::from_system_conf().unwrap();
 
     for domain in &domains {
-        lookup_domain(&resolver, domain)
+        let resolve_result = resolver.lookup_ip(domain);
+
+        if resolver.lookup_ip(domain).is_err() {
+            send_telegram_message(
+                format!(
+                    "{}::{}::{} {:?}",
+                    hostname::get().unwrap().into_string().unwrap(),
+                    TELEGRAM_MICHELED_EMERGENCY_MESSAGE_PREFIX,
+                    PROGRAM_NAME,
+                    resolve_result.unwrap_err().kind()
+                ),
+                TELEGRAM_MICHELED_EMERGENCIES_API_KEY,
+                TELEGRAM_MICHELED_EMERGENCIES_CHAT_ID,
+            );
+        }
     }
 }
 
+/**
+ * By default, Rust variables are passed by "copy" or "move" (depends on type). Remember to
+ * expressly use ref in function declarations!!!
+ *
+ * https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html
+ */
 fn main() -> Result<(), Error> {
-    let domains = vec![
-        "annikaschall.com",
-        "micheledurante.co.uk",
-        "micheledurante.com",
-    ];
+    let domains_var = env::var(DNS_CHECKER_DOMAINS).unwrap();
+    let domains = domains_var.split(",").collect();
 
     validate_domains(domains);
-    Ok(send_telegram_message(String::from("DNS checks done")))
+
+    Ok(send_telegram_message(
+        format!(
+            "{}::{}::{} {:?}",
+            hostname::get().unwrap().into_string().unwrap(),
+            TELEGRAM_MICHELED_ALIVE_MESSAGE_PREFIX,
+            PROGRAM_NAME,
+            "All checks done."
+        ),
+        TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY,
+        TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID,
+    ))
 }
 
 #[cfg(test)]
 mod tests {
-    // Note this useful idiom: importing names from outer (for mod tests) scope.
-    use super::*;
-    use mockall::predicate::*;
-    use mockall::*;
-    use trust_dns_resolver::error::ResolveResult;
-    use trust_dns_resolver::lookup_ip::LookupIp;
-
-    trait MyTrait {
-        fn foo(&self, x: u32) -> u32;
-    }
-
-    #[test]
-    fn my_test() {
-        // let mut mock = MockMyTrait::new();
-        mock! {
-            MyTrait {}     // Name of the mock struct, less the "Mock" prefix
-            trait Clone {   // definition of the trait to mock
-                fn clone(&self) -> Self;
-            }
-        }
-
-        let mut mock1 = MockMyStruct::new();
-        let mut mock = MockMyStruct::new();
-        let mut mock = mock.expect_foo().with(eq(4)).times(1).returning(|x| x + 1);
-        assert_eq!(5, mock.foo(4));
-    }
-
-    // #[test]
-    // fn test_lookup_domain_empty_string() {
-    //     let mut mock = MockResolver::new();
-    //     let domain = "invalid-domain";
+    // Look at tests again as soon as mocking external structs will be possible without creating
+    // traits to mimic the behaviour during tests.
     //
-    //     mock.expect_lookup_ip()
-    //         .with(eq(domain))
-    //         .times(1)
-    //         .returning(ResolveResult::Ok(()));
-    //
-    //     mock.expect_lookup_ip(domain);
-    // }
+    // https://docs.rs/mockall/0.6.0/mockall/#external-traits
 }

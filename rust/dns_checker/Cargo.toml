@@ -1,14 +1,13 @@
 [package]
 name = "dns_checker"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["micheled <me@micheledurante.com>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-trust-dns-resolver = "0.19.*"
-ureq = "1.5.*"
+trust-dns-resolver = "^0.19"
+ureq = "^1.5"
+hostname = "^0.3"
 
 [dev-dependencies]
 mockall = "0.8.*"
