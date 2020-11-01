@@ -3,7 +3,7 @@ A collection of scripts and other misc items related to the Pluto box.
 
 ## Alert Chats Specs
 All messages must be in the form of
-`{SERVER_NAME}_{MONITOR_NAME} {messages}`
+`{HOST_NAME}::{PROGRAM_NAME}::{MESSAGE_TYPE} "{message}"`
 
 ### Emergencies
 - chat: micheled_emergencies
@@ -34,23 +34,12 @@ Generally:
 
 ## Deployments
 1. `monthly-cleanup.sh` is located at `/opt/scripts-pluto`
-2. `dns_checker` is located at `...`
+2. `dns_checker` is located at `/opt/scripts-pluto/rust/dns_checker/target/release/dns_checker`
 
 Cron jobs are defined here `/var/spool/cron/crontabs/root` as:
 
     ```00 01 * * * /opt/scripts-pluto/scripts/backup-mail.sh```
+    ```01 01 * * * /opt/scripts-pluto/rust/dns_checker/target/release/dns_checker```
 
 Required env variables:
 1. `DNS_CHECKER_DOMAINS` must contain a comma-separated list of domains to check DNS for.
-
-## Telegram Bots
-Follow instructions here https://blog.bj13.us/2016/09/06/how-to-send-yourself-a-telegram-message-from-bash.html.
-
-### Pluto Monitoring
-- Bot name: `micheled_pluto`: dns_checker
-- Bot user name: `micheled_pluto_bot`: dns_checker
-
-Example URL
-```bash
-curl -s "https://api.telegram.org/bot{TELEGRAM_MICHELED_PLUTO_API_KEY}/sendMessage?chat_id={TELEGRAM_MICHELED_PLUTO_CHAT_ID}&text=pingping"
-```
