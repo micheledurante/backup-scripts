@@ -11,11 +11,22 @@ All messages must be in the form of
 - `TELEGRAM_MICHELED_EMERGENCIES_CHAT_ID`
 - format: `"HOSTNAME::DNS_CHECKER::EMERGENCY_PREFIX {message}"`
 
+E.g:
+```
+win10::EMERGENCY::DNS_CHECKER NoRecordsFound { query: Query { name: Name { is_fqdn: false, labels: [micheledurante] },
+ query_type: AAAA, query_class: IN }, valid_until: None }
+```
+
 ### Alive Messages
 - chat: micheled_alive_messages
 - bot: micheled_alive_messages_bot
 - `TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID`
 - format: `"HOSTNAME::DNS_CHECKER::ALIVE_MESSAGE_PREFIX {message}"`
+
+E.g.:
+```
+win10::ALIVE_MESSAGE::DNS_CHECKER "All checks done."
+```
 
 Generally:
 - `EMERGENCY_PREFIX` = `EMERGENCY`
