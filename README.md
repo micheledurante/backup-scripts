@@ -38,8 +38,8 @@ Generally:
 
 Cron jobs are defined here `/var/spool/cron/crontabs/root` as:
 
-    ```00 01 * * * /opt/scripts-pluto/scripts/backup-mail.sh```
-    ```01 01 * * * /opt/scripts-pluto/rust/dns_checker/target/release/dns_checker```
+    ```00 01 * * * /opt/scripts-pluto/scripts/backup-mail.sh >> /var/log/scripts-pluto/backup-mail.log 2>&1```
+    ```05 01 * * * /opt/scripts-pluto/rust/dns_checker/target/release/dns_checker >> /var/log/scripts-pluto/dns_checker.log 2>&1```
 
 Required env variables:
 1. `DNS_CHECKER_DOMAINS` must contain a comma-separated list of domains to check DNS for.
