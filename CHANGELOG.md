@@ -3,6 +3,11 @@
 ## 1.1.0 [Upcoming]
 - Configure https://lib.rs/crates/check-if-email-exists and add a monitor for mail availability.
 
+## 1.0.3 [2020-11-08]
+#### Added
+- Move to monthly web log files.
+- Set correct permissions for `sh` script.
+
 ## 1.0.2 [2020-11-08]
 #### Added
 - Use `consts` and `env` for chat IDs ad messages to use the new `EMRGENCIES` and `ALIVE_MESSAGES` chats.
