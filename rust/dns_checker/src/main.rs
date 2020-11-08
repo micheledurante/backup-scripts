@@ -6,7 +6,7 @@ use ureq;
 use ureq::Error;
 
 /// Send a message to the requested bot.
-pub fn send_telegram_message(text: String, api_key: &str, chat_id: &str) {
+pub fn send_telegram_message(text: String, api_key: String, chat_id: String) {
     ureq::post(&format!(
         "https://api.telegram.org/bot{api_key}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text=<code>{text}</code>",
         api_key = api_key,
@@ -26,14 +26,13 @@ fn validate_domains(domains: Vec<&str>) {
         if resolver.lookup_ip(domain).is_err() {
             send_telegram_message(
                 format!(
-                    "{}::{}::{} {:?}",
+                    "{}::EMERGENCY::{} {:?}",
                     hostname::get().unwrap().into_string().unwrap(),
-                    TELEGRAM_MICHELED_EMERGENCY_MESSAGE_PREFIX,
                     PROGRAM_NAME,
                     resolve_result.unwrap_err().kind()
                 ),
-                TELEGRAM_MICHELED_EMERGENCIES_API_KEY,
-                TELEGRAM_MICHELED_EMERGENCIES_CHAT_ID,
+                env::var(TELEGRAM_MICHELED_EMERGENCIES_API_KEY).unwrap(),
+                env::var(TELEGRAM_MICHELED_EMERGENCIES_CHAT_ID).unwrap(),
             );
         }
     }
@@ -53,14 +52,13 @@ fn main() -> Result<(), Error> {
 
     Ok(send_telegram_message(
         format!(
-            "{}::{}::{} {:?}",
+            "{}::ALIVE_MESSAGE::{} {:?}",
             hostname::get().unwrap().into_string().unwrap(),
-            TELEGRAM_MICHELED_ALIVE_MESSAGE_PREFIX,
             PROGRAM_NAME,
-            "All checks done."
+            "Ok"
         ),
-        TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY,
-        TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID,
+        env::var(TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY).unwrap(),
+        env::var(TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID).unwrap(),
     ))
 }
 

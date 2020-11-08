@@ -13,14 +13,12 @@ DESTINATION_PORT=$(BACKUP_MAIL_DESTINATION_PORT)
 TELEGRAM_API_KEY=$(TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY)
 TELEGRAM_CHAT_ID=$(TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID)
 
-#sshpass -f '/root/.tarball-mail' scp -P ${DESTINATION_PORT} tarball-mail@${DESTINATION_IP}/home/tarball-mail/${MONTH}.mail.tar.gz /mnt/raid/backups/mail
-
 rsync -chazP --no-motd --rsh="ssh -p ${DESTINATION_PORT} -i ${IDENTITY_LOCATION}" tarball-mail@${DESTINATION_IP}:/home/tarball-mail/${DATE}.mail.tar.gz "/mnt/raid/backups/mail/${MONTH}.mail.tar.gz"
 
 chown nobody:nogroup /mnt/raid/backups/mail/${MONTH}.mail.tar.gz
 
 # Log to custom file
-logger -s "Tarball \"${MONTH}.mail.tar.gz\" backed up in \"/mnt/raid/backups/mail\"" 2>> /var/log/scripts-pluto/backup-mail.log
+logger -s "Mail tarball \"${MONTH}.mail.tar.gz\" back up success" 2>> /var/log/scripts-pluto/backup-mail.log
 
 # Send Telegram message
 curl -s "https://api.telegram.org/bot${TELEGRAM_API_KEY}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=HTML&text=<code>${HOSTNAME}::ALIVE_MESSAGE::BACKUP_MAIL \"Ok\"</code>"

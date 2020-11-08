@@ -25,7 +25,7 @@ rsync -chazP --no-motd --rsh="ssh -p ${DESTINATION_PORT} -i ${IDENTITY_LOCATION}
 rsync -chazP --no-motd --rsh="ssh -p ${DESTINATION_PORT} -i ${IDENTITY_LOCATION}" scripts-pluto@${DESTINATION_IP}:/var/log/nginx/error.log "/mnt/raid/backups/debianbox.web/error.log"
 
 # Log to custom file
-logger -s "Web logs for \"${YEAR}\" backed up" 2>> /var/log/scripts-pluto/backup-web-logs.log
+logger -s "Web logs for \"${YEAR}\" back up success" 2>> /var/log/scripts-pluto/backup-web-logs.log
 
 # Send Telegram message
 curl -s "https://api.telegram.org/bot${TELEGRAM_API_KEY}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=HTML&text=<code>${HOSTNAME}::ALIVE_MESSAGE::BACKUP_WEB_LOGS \"Ok\"</code>"
