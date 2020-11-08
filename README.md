@@ -7,28 +7,32 @@ Cron jobs are defined here `/var/spool/cron/crontabs/root` as:
     ```00 01 * * * /usr/src/scripts-pluto/scripts/backup-mail.sh >> /var/log/scripts-pluto/backup-mail.log 2>&1```
     ```05 01 * * * /usr/src/scripts-pluto/rust/dns_checker/target/release/dns_checker >> /var/log/scripts-pluto/dns_checker.log 2>&1```
     ```30 01 * * * /usr/src/scripts-pluto/scripts/backup-web-logs.sh >> /var/log/scripts-pluto/backup-web-logs.log 2>&1```
+    ```00 02 * * * /usr/src/scripts-pluto/scripts/update-web-analytics.sh >> /var/log/scripts-pluto/update-web-analytics.log 2>&1```
+    ```00 00 1 * * /usr/src/scripts-pluto/scripts/update-geo-ip.sh >> /var/log/scripts-pluto/update-geo-ip.log 2>&1```
 
 Required env variables. MUST be defined in `/etc/environment` for cron to work correctly:
+1. `TELEGRAM_MICHELED_EMERGENCIES_API_KEY`
+1. `TELEGRAM_MICHELED_EMERGENCIES_CHAT_ID`
+1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY`
+1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID`
+
+In addition, each program needs:
+
 - dns_checker
     1. `DNS_CHECKER_DOMAINS` a comma-separated list of domains to check DNS for.
-    1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY`
-    1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID`
-    1. `TELEGRAM_MICHELED_EMERGENCIES_API_KEY`
-    1. `TELEGRAM_MICHELED_EMERGENCIES_CHAT_ID`
     
 - backup-mail
     1. `BACKUP_MAIL_DESTINATION_PORT`
     1. `BACKUP_MAIL_IDENTITY_LOCATION`
     1. `BACKUP_MAIL_DESTINATION_IP`
-    1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY`
-    1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID`
     
 - backup-web-logs
     1. `BACKUP_WEB_LOGS_DESTINATION_PORT`
     1. `BACKUP_WEB_LOGS_IDENTITY_LOCATION`
     1. `BACKUP_WEB_LOGS_DESTINATION_IP`
-    1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY`
-    1. `TELEGRAM_MICHELED_ALIVE_MESSAGES_CHAT_ID`
+
+- update-geo-ip
+    1. `GEOIP_CONF_LOCATION` location of GeoIp.conf file.
 
 ## Alert Chats Specs
 All messages must be in the form of
