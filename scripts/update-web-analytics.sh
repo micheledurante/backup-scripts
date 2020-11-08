@@ -7,7 +7,7 @@ YEAR_MONTH=$(date +%Y-%m)
 HOSTNAME=$(hostname)
 
 # BcryptDecoder
-goaccess \
+/usr/local/bin/goaccess \
     --agent-list \
     --anonymize-ip \
     --persist \
@@ -21,7 +21,7 @@ goaccess \
     "/mnt/raid/backups/debianbox.web/bcrypt-decoder.com.${YEAR_MONTH}.access.log";
 
 # Fosdinuovo
-goaccess \
+/usr/local/bin/goaccess \
     --agent-list \
     --anonymize-ip \
     --persist \
@@ -35,7 +35,7 @@ goaccess \
     "/mnt/raid/backups/debianbox.web/fosdinuovo.org.${YEAR_MONTH}.access.log";
 
 # This is Durante
-goaccess \
+/usr/local/bin/goaccess \
     --agent-list \
     --anonymize-ip \
     --persist \
