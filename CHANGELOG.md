@@ -3,6 +3,11 @@
 ## 1.1.0 [Upcoming]
 - Configure https://lib.rs/crates/check-if-email-exists and add a monitor for mail availability.
 
+## 1.0.5 [2020-11-08]
+#### Added
+- Goaccess html reports update script.
+- Geo IP update script.
+
 ## 1.0.4 [2020-11-08]
 #### Added
 - Move to monthly web log files.

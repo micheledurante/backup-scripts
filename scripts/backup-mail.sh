@@ -1,6 +1,5 @@
 #!/bin/sh
 # Script to backup the mail tarball.
-# See README for more info.
 
 DATE=$(date --rfc-3339=date)
 YEAR_MONTH=$(date +%Y-%m)

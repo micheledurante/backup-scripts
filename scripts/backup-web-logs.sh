@@ -1,6 +1,5 @@
 #!/bin/sh
 # Script to backup the web server logs.
-# See README for more info.
 
 YEAR_MONTH=$(date +%Y-%m)
 HOSTNAME=$(hostname)

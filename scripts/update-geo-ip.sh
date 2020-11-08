@@ -1,6 +1,5 @@
 #!/bin/sh
 # Script to update the Geo IP databases by Maxmind.
-# See README for more info.
 
 HOSTNAME=$(hostname)
 

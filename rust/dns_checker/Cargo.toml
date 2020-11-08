@@ -1,6 +1,6 @@
 [package]
 name = "dns_checker"
-version = "1.0.3"
+version = "1.0.5"
 authors = ["micheled <me@micheledurante.com>"]
 edition = "2018"
 

@@ -1,6 +1,5 @@
 #!/bin/sh
 # Script to update the goaccess databases and to update HTML reports.
-# See README for more info.
 
 YEAR=$(date +%Y)
 YEAR_MONTH=$(date +%Y-%m)
