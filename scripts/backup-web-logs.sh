@@ -9,10 +9,10 @@ HOSTNAME=$(hostname)
 rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/bcrypt_decoder/bcrypt-decoder.com.access.log "/mnt/raid/backups/debianbox.web/bcrypt-decoder.com.${YEAR}.access.log"
 
 # Fosdinuovo
-rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/bcrypt_decoder/bcrypt-decoder.com.access.log "/mnt/raid/backups/debianbox.web/fosdinuovo.org.${YEAR}.access.log"
+rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/fosdinuovo/fosdinuovo.org.access.log "/mnt/raid/backups/debianbox.web/fosdinuovo.org.${YEAR}.access.log"
 
 # This is Durante
-rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/bcrypt_decoder/bcrypt-decoder.com.access.log "/mnt/raid/backups/debianbox.web/this-is-durante.com.${YEAR}.access.log"
+rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/this-is-durante/this-is-durante.com.access.log "/mnt/raid/backups/debianbox.web/this-is-durante.com.${YEAR}.access.log"
 
 # Error logs
 rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/error.log "/mnt/raid/backups/debianbox.web/error.log"
