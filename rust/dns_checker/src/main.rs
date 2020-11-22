@@ -12,8 +12,7 @@ pub fn send_telegram_message(text: String, api_key: String, chat_id: String) {
         api_key = api_key,
         chat_id = chat_id,
         text = text
-    ))
-    .call();
+    )).call();
 }
 
 /// Do DNS lookups for the given domains. Send a Telegram messages to emergencies in case of error.
@@ -28,7 +27,7 @@ fn validate_domains(domains: Vec<&str>) {
                 format!(
                     "{}::EMERGENCY::{} {:?}",
                     hostname::get().unwrap().into_string().unwrap(),
-                    PROGRAM_NAME,
+                    DNS_CHECKER_PROGRAM_NAME,
                     resolve_result.unwrap_err().kind()
                 ),
                 env::var(TELEGRAM_MICHELED_EMERGENCIES_API_KEY).unwrap(),
@@ -54,7 +53,7 @@ fn main() -> Result<(), Error> {
         format!(
             "{}::ALIVE_MESSAGE::{} {:?}",
             hostname::get().unwrap().into_string().unwrap(),
-            PROGRAM_NAME,
+            DNS_CHECKER_PROGRAM_NAME,
             "Ok"
         ),
         env::var(TELEGRAM_MICHELED_ALIVE_MESSAGES_API_KEY).unwrap(),
