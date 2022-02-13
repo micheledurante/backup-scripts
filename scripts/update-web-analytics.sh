@@ -13,7 +13,7 @@ HOSTNAME=$(hostname)
     --real-os \
     --restore \
     --html-prefs='{"theme":"bright","perPage":10,"layout":"vertical","showTables":true}' \
-    --geoip-database "/usr/src/geoip/GeoLite2-City.mmdb" \
+    --geoip-database "/usr/share/GeoIP/GeoLite2-City.mmdb" \
     --db-path "/mnt/raid/diy/bcrypt-decoder/analytics/db/" \
     --log-format "COMBINED" \
     --output "/mnt/raid/diy/bcrypt-decoder/analytics/bcrypt_decoder.com.${YEAR}.html" \
@@ -27,7 +27,7 @@ HOSTNAME=$(hostname)
     --real-os \
     --restore \
     --html-prefs='{"theme":"bright","perPage":10,"layout":"vertical","showTables":true}' \
-    --geoip-database "/usr/src/geoip/GeoLite2-City.mmdb" \
+    --geoip-database "/usr/share/GeoIP/GeoLite2-City.mmdb" \
     --db-path "/mnt/raid/diy/fosdinuovo/analytics/db/" \
     --log-format "COMBINED" \
     --output "/mnt/raid/diy/fosdinuovo/analytics/fosdinuovo.org.${YEAR}.html" \
@@ -41,7 +41,7 @@ HOSTNAME=$(hostname)
     --real-os \
     --restore \
     --html-prefs='{"theme":"bright","perPage":10,"layout":"vertical","showTables":true}' \
-    --geoip-database "/usr/src/geoip/GeoLite2-City.mmdb" \
+    --geoip-database "/usr/share/GeoIP/GeoLite2-City.mmdb" \
     --db-path "/mnt/raid/diy/this-is-durante/analytics/db/" \
     --log-format "COMBINED" \
     --output "/mnt/raid/diy/this-is-durante/analytics/this-is-durante.com.${YEAR}.html" \
