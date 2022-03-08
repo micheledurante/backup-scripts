@@ -11,7 +11,7 @@ rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BA
 rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@"${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/fosdinuovo/fosdinuovo.org.access.log" "/mnt/raid/backups/debianbox.web/fosdinuovo.org.${YEAR_MONTH}.access.log";
 
 # This is Durante
-rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@"${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/this-is-durante/this-is-durante.com.access.log" "/mnt/raid/backups/debianbox.web/this-is-durante.com.${YEAR_MONTH}.access.log";
+rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@"${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/this-is-durante/thisisdurante.com.access.log" "/mnt/raid/backups/debianbox.web/this-is-durante.com.${YEAR_MONTH}.access.log";
 
 # Error logs
 rsync -chazP --no-motd --rsh="ssh -p ${BACKUP_WEB_LOGS_DESTINATION_PORT} -i ${BACKUP_WEB_LOGS_IDENTITY_LOCATION}" scripts-pluto@"${BACKUP_WEB_LOGS_DESTINATION_IP}:/var/log/nginx/error.log" "/mnt/raid/backups/debianbox.web/error.log";
