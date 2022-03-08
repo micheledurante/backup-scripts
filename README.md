@@ -13,7 +13,6 @@ Cron jobs are defined here `/var/spool/cron/crontabs/root` as:
     ```00 01 * * * /usr/src/backup-scripts/scripts/backup-mail.sh >> /var/log/backup-scripts/backup-mail.log 2>&1```
     ```05 01 * * * /usr/src/backup-scripts/rust/dns_checker/target/release/dns_checker >> /var/log/backup-scripts/dns_checker.log 2>&1```
     ```30 01 * * * /usr/src/backup-scripts/scripts/backup-web-logs.sh >> /var/log/backup-scripts/backup-web-logs.log 2>&1```
-    ```00 02 * * * /usr/src/backup-scripts/scripts/update-web-analytics.sh >> /var/log/backup-scripts/update-web-analytics.log 2>&1```
     ```00 00 1 * * /usr/src/backup-scripts/scripts/update-geo-ip.sh >> /var/log/backup-scripts/update-geo-ip.log 2>&1```
 
 Required env variables. MUST be defined in `/etc/environment` for cron to work correctly:
